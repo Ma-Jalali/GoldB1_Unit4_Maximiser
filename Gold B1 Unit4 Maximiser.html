@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gold B1 Preliminary: Exam Maximiser — Unit 4</title>
+<style>
+  :root{
+    --red:#C8102E; --red-dark:#9E0C22; --red-soft:#E24A5F;
+    --pink:#FCEDEB; --pink-border:#F1CDC8;
+    --ink:#1f2124; --muted:#5b6068; --line:#e5e5e8;
+    --bg:#f4f4f5; --card:#ffffff;
+    --ok:#1a7f4b; --ok-bg:#e7f5ec; --ok-border:#b7e0c6;
+    --bad:#c0263b; --bad-bg:#fbebed; --bad-border:#f2c2c9;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6; font-size:16px;
+  }
+  .wrap{max-width:840px; margin:0 auto; padding:0 14px 70px;}
+
+  /* Header */
+  header{background:var(--red); color:#fff; padding:22px 14px 24px;}
+  header .inner{max-width:840px; margin:0 auto; display:flex; align-items:center; gap:16px;}
+  .unitbadge{
+    background:#fff; color:var(--red); font-weight:800; font-size:34px;
+    width:60px; height:60px; border-radius:8px;
+    display:flex; align-items:center; justify-content:center; flex:0 0 auto;
+  }
+  header h1{margin:0; font-size:15px; font-weight:600; letter-spacing:.3px; opacity:.95;}
+  header h2{margin:3px 0 0; font-size:25px; font-weight:800; letter-spacing:.4px; line-height:1.2;}
+
+  /* Contents */
+  .toc{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; margin:18px 0;}
+  .toc b{color:var(--red-dark); display:block; margin-bottom:8px; font-size:13px; text-transform:uppercase; letter-spacing:.7px;}
+  .toc a{display:inline-block; margin:5px 12px 5px 0; color:var(--ink); text-decoration:none; font-size:14.5px; border-bottom:2px solid var(--pink-border); padding-bottom:1px;}
+  .toc a:hover,.toc a:focus{border-color:var(--red);}
+
+  /* Section headings */
+  .skill{margin:36px 0 6px; border-top:3px solid var(--red); padding-top:14px;}
+  .skill h3{color:var(--red-dark); font-size:24px; margin:0; font-weight:800;}
+  .skill .sub{color:var(--muted); font-size:15px; margin:2px 0 0;}
+
+  /* Exercise card */
+  .exercise{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 16px; margin:16px 0; box-shadow:0 1px 2px rgba(0,0,0,.03);}
+  .ex-head{display:flex; gap:11px; align-items:flex-start; margin-bottom:14px;}
+  .exnum{background:var(--red); color:#fff; font-weight:800; min-width:27px; height:27px; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:15px; flex:0 0 auto; margin-top:2px;}
+  .ex-title{font-weight:700; font-size:15.5px; line-height:1.45;}
+  .ex-title .track{display:inline-block; background:var(--red); color:#fff; border-radius:20px; padding:2px 10px; font-size:12.5px; margin-right:7px; white-space:nowrap; vertical-align:1px;}
+
+  /* Question lists */
+  ol.qlist{margin:6px 0 0; padding-left:26px;}
+  ol.qlist>li{margin:16px 0; padding-left:5px;}
+  ol.qlist>li::marker{color:var(--red); font-weight:700;}
+  ol.qlist.tight>li{margin:11px 0;}
+  .q-ans{margin-top:8px;}
+  .q-ans .lead{color:var(--muted); font-size:13.5px; margin-right:6px;}
+
+  /* Lettered lists (A–H options, adverts, paragraphs) */
+  ul.lettered{list-style:none; padding:0; margin:10px 0 0;}
+  ul.lettered>li{position:relative; padding-left:32px; margin:12px 0;}
+  ul.lettered>li>.cl{position:absolute; left:0; top:1px; background:var(--red); color:#fff; width:22px; height:22px; border-radius:5px; text-align:center; font-weight:700; font-size:13px; line-height:22px;}
+
+  /* Reference boxes */
+  .passage{background:var(--pink); border:1px solid var(--pink-border); border-radius:10px; padding:16px 17px; margin:12px 0;}
+  .passage h4{margin:0 0 10px; color:var(--red-dark); font-size:19px;}
+  .passage p{margin:10px 0;}
+  .passage p:first-of-type{margin-top:0;}
+  .passage p:last-child{margin-bottom:0;}
+  .card-note{background:#fff; border:1px solid var(--pink-border); border-radius:10px; padding:14px 16px; margin:12px 0;}
+
+  /* Word bank as chips */
+  .wordbox{margin:10px 0 14px;}
+  .wordbox .wb-label{display:block; font-size:11.5px; text-transform:uppercase; letter-spacing:.7px; color:var(--muted); font-weight:700; margin-bottom:7px;}
+  .chips{display:flex; flex-wrap:wrap; gap:8px;}
+  .chips span{background:#faf7f7; border:1px dashed var(--pink-border); border-radius:20px; padding:5px 13px; font-weight:600; color:var(--red-dark); font-size:14.5px;}
+
+  /* Inputs */
+  input[type=text]{
+    font:inherit; border:none; border-bottom:2px solid var(--pink-border); background:#fdf7f7;
+    padding:6px 8px; min-width:110px; width:180px; max-width:100%; border-radius:5px 5px 0 0; color:var(--ink);
+  }
+  input[type=text].wide{width:340px;}
+  input[type=text].narrow{width:110px; min-width:80px;}
+  input[type=text]:focus{outline:2px solid var(--red-soft); outline-offset:1px; border-color:var(--red);}
+  select{
+    font:inherit; padding:7px 9px; border:1px solid var(--pink-border); border-radius:8px;
+    background:#fff; color:var(--ink); max-width:100%; margin:2px 0;
+  }
+  select:focus{outline:2px solid var(--red-soft); outline-offset:1px; border-color:var(--red);}
+
+  /* Option pills (inline choices such as true/false) */
+  .opts{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px;}
+  .opt{display:inline-flex; align-items:center; gap:6px; cursor:pointer; padding:7px 13px; border:1px solid var(--pink-border); border-radius:20px; background:#fff; font-size:15px;}
+  .opt input{accent-color:var(--red); margin:0; flex:0 0 auto;}
+  /* Stacked multiple choice */
+  .mc{display:block; margin-top:10px;}
+  .mc .opt{display:flex; align-items:flex-start; margin:8px 0; border-radius:9px; padding:10px 13px; line-height:1.45;}
+  .mc .opt input{margin-top:4px;}
+  .mc .lbl{font-weight:700; color:var(--red-dark); margin-right:3px; flex:0 0 auto;}
+  /* Checkbox group */
+  .tips{display:flex; flex-direction:column; gap:8px; margin-top:10px;}
+  .tips label{display:flex; align-items:flex-start; gap:9px; padding:10px 13px; border:1px solid var(--pink-border); border-radius:9px; cursor:pointer; line-height:1.45;}
+  .tips input{accent-color:var(--red); margin-top:4px; flex:0 0 auto;}
+  .tips.inline{flex-direction:row; flex-wrap:wrap;}
+  .tips.inline label{padding:7px 13px; border-radius:20px;}
+
+  /* Dialogue */
+  .dlg{background:var(--pink); border:1px solid var(--pink-border); border-radius:10px; padding:16px;}
+  .dlg .turn{display:grid; grid-template-columns:76px 1fr; gap:10px; margin-bottom:12px;}
+  .dlg .turn:last-child{margin-bottom:0;}
+  .dlg .who{font-weight:800; color:var(--red-dark);}
+  @media (max-width:520px){
+    .dlg .turn{grid-template-columns:1fr; gap:2px;}
+  }
+
+  /* Answer feedback */
+  .correct{border-color:var(--ok)!important; background:var(--ok-bg)!important;}
+  .incorrect{border-color:var(--bad)!important; background:var(--bad-bg)!important;}
+  .opt.opt-correct{background:var(--ok-bg); border-color:var(--ok); color:var(--ok); font-weight:700;}
+  .opt.opt-wrong{background:var(--bad-bg); border-color:var(--bad); color:var(--bad); text-decoration:line-through;}
+  .tips label.opt-correct{background:var(--ok-bg); border-color:var(--ok); color:var(--ok); font-weight:700;}
+  .tips label.opt-wrong{background:var(--bad-bg); border-color:var(--bad); color:var(--bad); text-decoration:line-through;}
+  .ans-hint{display:inline-block; color:var(--ok); font-weight:700; font-size:14px; margin-left:7px; white-space:nowrap;}
+
+  /* Buttons + result */
+  .controls{display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:18px; border-top:1px solid var(--line); padding-top:14px;}
+  button{font:inherit; font-weight:700; border-radius:8px; padding:10px 17px; cursor:pointer; border:2px solid var(--red);}
+  button:focus-visible{outline:2px solid var(--ink); outline-offset:2px;}
+  .btn-check{background:var(--red); color:#fff;}
+  .btn-check:active{background:var(--red-dark);}
+  .btn-reset{background:#fff; color:var(--red);}
+  .btn-model{background:#fff; color:var(--red-dark); border-color:var(--pink-border);}
+  .result{font-weight:700; font-size:15px;}
+  .result.pass{color:var(--ok);} .result.part{color:var(--red-dark);}
+  .model{display:none; margin-top:14px; background:#f5faf6; border:1px solid var(--ok-border); border-radius:10px; padding:14px 16px;}
+  .model.show{display:block;}
+  .model h5{margin:0 0 8px; color:var(--ok); font-size:12.5px; text-transform:uppercase; letter-spacing:.6px;}
+  .model p{margin:8px 0;}
+  .model p:last-child{margin-bottom:0;}
+
+  /* Notes, exam boxes, audio */
+  .note{background:#fff8f8; border:1px solid var(--pink-border); border-radius:10px; padding:13px 15px; font-size:14.5px; color:var(--muted); margin:12px 0;}
+  .note b{color:var(--ink);}
+  .exambox{background:var(--pink); border-radius:10px; padding:15px 17px; margin:14px 0; font-size:14.5px;}
+  .exambox h4{margin:0 0 6px; color:var(--red-dark); font-size:15px;}
+  .exambox h4+p{margin-top:0;}
+  .exambox p{margin:0 0 10px;}
+  .exambox ul{margin:0; padding-left:20px;}
+  .exambox li{margin:5px 0;}
+  .audio{margin:12px 0 14px;}
+  .audio iframe{width:100%; height:66px; border:0; border-radius:8px; background:#fff;}
+  .audio-fallback{font-size:13px; margin:5px 0 0; color:var(--muted);}
+  a{color:var(--red-dark);}
+
+  /* Floating back-to-top button */
+  #toTop{
+    position:fixed; right:16px; bottom:calc(16px + env(safe-area-inset-bottom,0px));
+    z-index:50; display:inline-flex; align-items:center; gap:7px;
+    background:var(--red); color:#fff; border:none; border-radius:26px;
+    padding:12px 18px; font-size:15px; font-weight:700; line-height:1;
+    box-shadow:0 4px 14px rgba(0,0,0,.22); cursor:pointer;
+    opacity:0; visibility:hidden; transform:translateY(12px);
+    transition:opacity .2s ease, transform .2s ease, visibility .2s;
+  }
+  #toTop.show{opacity:1; visibility:visible; transform:translateY(0);}
+  #toTop:active{background:var(--red-dark);}
+  #toTop:focus-visible{outline:3px solid var(--ink); outline-offset:2px;}
+  #toTop .arrow{font-size:17px; line-height:1;}
+  @media (prefers-reduced-motion:reduce){
+    #toTop{transition:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  footer{color:var(--muted); font-size:13px; text-align:center; margin-top:34px;}
+  hr.soft{border:none; border-top:1px solid var(--line); margin:30px 0 0;}
+  @media (max-width:520px){
+    header h2{font-size:21px;}
+    .exercise{padding:16px 13px;}
+    ol.qlist{padding-left:22px;}
+    input[type=text].wide{width:100%;}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="inner">
+    <div class="unitbadge">4</div>
+    <div>
+      <h1>Gold B1 Preliminary: Exam Maximiser</h1>
+      <h2>Unit 4 — Then and now</h2>
+    </div>
+  </div>
+</header>
+<div class="wrap">
+<div class="toc">
+  <b>Contents</b>
+  <a href="#spk">Speaking · collaborative task</a>
+  <a href="#lis">Listening · pictures</a>
+  <a href="#gram1">Grammar · used to</a>
+  <a href="#read">Reading · multiple-choice cloze</a>
+  <a href="#voc1">Vocabulary · linkers</a>
+  <a href="#voc2">Vocabulary · town and city</a>
+  <a href="#gram2">Grammar · past simple &amp; present perfect</a>
+  <a href="#wri">Writing · article</a>
+</div>
+
+<div class="note">Answer each exercise, then tap <b>Check answers</b> to see what you got right (green) or wrong (red). Tap <b>Reset</b> to try again.</div>
+
+<!-- ================= SPEAKING ================= -->
+<div class="skill" id="spk">
+  <h3>Speaking</h3>
+  <p class="sub">Collaborative task (Part 3) &middot; Coursebook page 39</p>
+</div>
+
+<div class="exambox">
+  <h4>About the exam</h4>
+  <p>You and your partner speak to each other. The examiner gives you a situation to discuss. There are some pictures to help you in your discussion. Once the examiner has introduced the task, they don’t join in.</p>
+  <h4>Strategy</h4>
+  <ul>
+    <li>Discuss each picture with your partner. Say all you can about each picture before you move on to the next one.</li>
+    <li>Listen to your partner and comment on their ideas. If your partner is quiet, encourage them to speak by asking questions. You won’t lose marks if your partner doesn’t answer your questions.</li>
+    <li>Don’t hurry to reach a decision. You don’t have to agree before the examiner stops you.</li>
+  </ul>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">1</span><span class="ex-title"><span class="track">Track 12</span>Look at the exam task and then listen to a conversation between two students. Do they reach a decision?</span></div>
+  <div class="card-note">
+    <p>Some students want to make a time capsule so that people who live a hundred years from now can learn about life today.</p>
+    <p>Here are some things they can put in the capsule.</p>
+    <p style="margin-bottom:0"><b>Things to put in the time capsule:</b> a photograph of a city, money (coins and notes), a newspaper, jeans, a T-shirt and trainers, a mobile phone, a fashion magazine, a handwritten recipe.</p>
+  </div>
+  <div class="audio">
+    <iframe src="https://drive.google.com/file/d/11qwE4zHgVlYDQhJpLo_kpafeTOJvOv54/preview" allow="autoplay" title="Track 12"></iframe>
+    <p class="audio-fallback">If the player does not load, <a href="https://drive.google.com/file/d/11qwE4zHgVlYDQhJpLo_kpafeTOJvOv54/view" target="_blank" rel="noopener">open Track 12 in a new tab</a>.</p>
+  </div>
+  <div class="opts" data-type="radio" data-answer="no">
+    <label class="opt"><input type="radio" name="u4s1" value="yes">Yes, they do</label>
+    <label class="opt"><input type="radio" name="u4s1" value="no">No, they don’t</label>
+  </div>
+  <div class="model">
+    <h5>Answer</h5>
+    <p>They don’t reach a decision. The examiner stops them because they have been speaking for long enough. This is normal — you do not have to agree.</p>
+  </div>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <button class="btn-model" onclick="toggleModel(this)">Show explanation</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">2</span><span class="ex-title">Complete these sentences from the conversation in Exercise 1. Then listen to Track 12 again and check.</span></div>
+  <ol class="qlist">
+    <li>Do you <input type="text" class="narrow" data-type="text" data-answer="think"> we should choose small things?</li>
+    <li>How <input type="text" class="narrow" data-type="text" data-answer="about"> the mobile phone?</li>
+    <li>We <input type="text" class="narrow" data-type="text" data-answer="could"> put different kinds of music on it.</li>
+    <li><input type="text" class="narrow" data-type="text" data-answer="what"> do you think about the money?</li>
+    <li><input type="text" class="narrow" data-type="text" data-answer="maybe"> we could just use the front page.</li>
+    <li>So <input type="text" class="narrow" data-type="text" data-answer="which"> would be most interesting?</li>
+  </ol>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<!-- ================= LISTENING ================= -->
+<div class="skill" id="lis">
+  <h3>Listening</h3>
+  <p class="sub">Multiple choice, pictures (Part 1) &middot; Coursebook page 40</p>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">1</span><span class="ex-title"><span class="track">Track 13</span>For each question, choose the correct answer.</span></div>
+  <div class="audio">
+    <iframe src="https://drive.google.com/file/d/1uCJt7E-LHmg_MRjlZmE-9p62rCl6i4hK/preview" allow="autoplay" title="Track 13"></iframe>
+    <p class="audio-fallback">If the player does not load, <a href="https://drive.google.com/file/d/1uCJt7E-LHmg_MRjlZmE-9p62rCl6i4hK/view" target="_blank" rel="noopener">open Track 13 in a new tab</a>.</p>
+  </div>
+  <ol class="qlist">
+    <li>Where is the art gallery?
+      <div class="mc" data-type="radio" data-answer="C">
+        <label class="opt"><input type="radio" name="u4l1a" value="A"><span><span class="lbl">A</span> on the left, before the museum</span></label>
+        <label class="opt"><input type="radio" name="u4l1a" value="B"><span><span class="lbl">B</span> on the right, after the museum</span></label>
+        <label class="opt"><input type="radio" name="u4l1a" value="C"><span><span class="lbl">C</span> on the right, opposite the museum</span></label>
+      </div></li>
+    <li>What did the woman like best in the museum?
+      <div class="mc" data-type="radio" data-answer="B">
+        <label class="opt"><input type="radio" name="u4l1b" value="A"><span><span class="lbl">A</span> the plates</span></label>
+        <label class="opt"><input type="radio" name="u4l1b" value="B"><span><span class="lbl">B</span> the jewellery</span></label>
+        <label class="opt"><input type="radio" name="u4l1b" value="C"><span><span class="lbl">C</span> the dress</span></label>
+      </div></li>
+    <li>When is the best day for students to visit the museum?
+      <div class="mc" data-type="radio" data-answer="B">
+        <label class="opt"><input type="radio" name="u4l1c" value="A"><span><span class="lbl">A</span> Tuesday</span></label>
+        <label class="opt"><input type="radio" name="u4l1c" value="B"><span><span class="lbl">B</span> Wednesday</span></label>
+        <label class="opt"><input type="radio" name="u4l1c" value="C"><span><span class="lbl">C</span> Saturday</span></label>
+      </div></li>
+    <li>What did the man buy in the museum shop?
+      <div class="mc" data-type="radio" data-answer="C">
+        <label class="opt"><input type="radio" name="u4l1d" value="A"><span><span class="lbl">A</span> a mug</span></label>
+        <label class="opt"><input type="radio" name="u4l1d" value="B"><span><span class="lbl">B</span> a pen</span></label>
+        <label class="opt"><input type="radio" name="u4l1d" value="C"><span><span class="lbl">C</span> a keyring</span></label>
+      </div></li>
+    <li>What does the woman say is most useful to her?
+      <div class="mc" data-type="radio" data-answer="B">
+        <label class="opt"><input type="radio" name="u4l1e" value="A"><span><span class="lbl">A</span> her mobile phone</span></label>
+        <label class="opt"><input type="radio" name="u4l1e" value="B"><span><span class="lbl">B</span> her dictionary</span></label>
+        <label class="opt"><input type="radio" name="u4l1e" value="C"><span><span class="lbl">C</span> her laptop</span></label>
+      </div></li>
+    <li>What has the man kept the longest?
+      <div class="mc" data-type="radio" data-answer="A">
+        <label class="opt"><input type="radio" name="u4l1f" value="A"><span><span class="lbl">A</span> a teddy bear</span></label>
+        <label class="opt"><input type="radio" name="u4l1f" value="B"><span><span class="lbl">B</span> a theatre ticket</span></label>
+        <label class="opt"><input type="radio" name="u4l1f" value="C"><span><span class="lbl">C</span> a picture</span></label>
+      </div></li>
+    <li>Where does the woman want to go at the weekend?
+      <div class="mc" data-type="radio" data-answer="A">
+        <label class="opt"><input type="radio" name="u4l1g" value="A"><span><span class="lbl">A</span> the museum</span></label>
+        <label class="opt"><input type="radio" name="u4l1g" value="B"><span><span class="lbl">B</span> the art gallery</span></label>
+        <label class="opt"><input type="radio" name="u4l1g" value="C"><span><span class="lbl">C</span> the shops</span></label>
+      </div></li>
+  </ol>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<!-- ================= GRAMMAR 1 ================= -->
+<div class="skill" id="gram1">
+  <h3>Grammar</h3>
+  <p class="sub">used to &middot; Coursebook page 41</p>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">1</span><span class="ex-title">Complete the sentences with <em>used to</em> and the verbs in the box.</span></div>
+  <div class="wordbox">
+    <span class="wb-label">Verbs</span>
+    <div class="chips"><span>go</span><span>have</span><span>live</span><span>make</span><span>see</span><span>tell</span></div>
+  </div>
+  <ol class="qlist">
+    <li>I <input type="text" data-type="text" data-answer="used to live"> in Melbourne but now I live in Sydney.</li>
+    <li>I <input type="text" data-type="text" data-answer="used to have"> a next door neighbour in Melbourne called Diana.</li>
+    <li>We <input type="text" data-type="text" data-answer="used to see"> each other every day but now we talk on social media.</li>
+    <li>We <input type="text" data-type="text" data-answer="used to go"> to a café to have coffee and talk but we can’t now.</li>
+    <li>Diana <input type="text" data-type="text" data-answer="used to tell"> very funny jokes and I miss those.</li>
+    <li>She <input type="text" data-type="text" data-answer="used to make"> me laugh so much it hurt and nobody else can do that.</li>
+  </ol>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">2</span><span class="ex-title">Put the words in the correct order to make a conversation.</span></div>
+  <ol class="qlist">
+    <li>in / winter / you / didn’t / go / skiing / use / to / ?
+      <div class="q-ans"><input type="text" class="wide" data-type="text" data-answer="didn't you use to go skiing in winter"></div></li>
+    <li>Yes. / Switzerland / used / two / weeks / we / always / to go / for / to / .
+      <div class="q-ans"><input type="text" class="wide" data-type="text" data-answer="yes. we always used to go to switzerland for two weeks|we always used to go to switzerland for two weeks"></div></li>
+    <li>use / did / go / to / in / always / you / January / ?
+      <div class="q-ans"><input type="text" class="wide" data-type="text" data-answer="did you always use to go in january"></div></li>
+    <li>Yes. / same / used / see / the / people / to / we / always / there / .
+      <div class="q-ans"><input type="text" class="wide" data-type="text" data-answer="yes. we always used to see the same people there|we always used to see the same people there"></div></li>
+    <li>what / most / did / you / use / enjoy / to / ?
+      <div class="q-ans"><input type="text" class="wide" data-type="text" data-answer="what did you use to enjoy most"></div></li>
+    <li>Everything! / falling / over / only / was / thing / use / didn’t / to / I / enjoy / the / .
+      <div class="q-ans"><input type="text" class="wide" data-type="text" data-answer="everything! falling over was the only thing i didn't use to enjoy|falling over was the only thing i didn't use to enjoy|everything! the only thing i didn't use to enjoy was falling over"></div></li>
+  </ol>
+  <div class="model">
+    <h5>Answers</h5>
+    <p>1 Didn’t you use to go skiing in winter?</p>
+    <p>2 Yes. We always used to go to Switzerland for two weeks.</p>
+    <p>3 Did you always use to go in January?</p>
+    <p>4 Yes. We always used to see the same people there.</p>
+    <p>5 What did you use to enjoy most?</p>
+    <p>6 Everything! Falling over was the only thing I didn’t use to enjoy. <em>OR</em> Everything! The only thing I didn’t use to enjoy was falling over.</p>
+  </div>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <button class="btn-model" onclick="toggleModel(this)">Show answers</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">3</span><span class="ex-title">Complete the sentences with <em>used to</em> and a suitable verb.</span></div>
+  <p><em>In the past …</em></p>
+  <ol class="qlist">
+    <li>A lot of people <input type="text" class="wide" data-type="text" data-answer="used to get|used to catch"> the train to work.</li>
+    <li>Most men <input type="text" class="wide" data-type="text" data-answer="used to wear"> hats.</li>
+    <li>Women <input type="text" class="wide" data-type="text" data-answer="didn't use to wear"> trousers or jeans.</li>
+    <li>People only <input type="text" class="wide" data-type="text" data-answer="used to have"> one TV and programmes were in black and white.</li>
+    <li>The whole family <input type="text" class="wide" data-type="text" data-answer="used to watch"> TV together.</li>
+  </ol>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<!-- ================= READING ================= -->
+<div class="skill" id="read">
+  <h3>Reading</h3>
+  <p class="sub">Multiple-choice cloze (Part 5) &middot; Coursebook page 42</p>
+</div>
+
+<div class="exambox">
+  <h4>About the exam</h4>
+  <p>You read a short text with six words missing. There are four options for each missing word. You choose the option which correctly fills the gap. The options test vocabulary including words with similar meanings, common collocations and phrases, and phrasal verbs.</p>
+  <h4>Strategy</h4>
+  <ul>
+    <li>Read the title and the text quickly to see what it is about.</li>
+    <li>Read the text again carefully. At each gap, think about what kind of word is missing.</li>
+    <li>Look at the four options and choose the one that fits the gap.</li>
+    <li>Read the whole text again to make sure it makes sense.</li>
+  </ul>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">1</span><span class="ex-title">Choose words or phrases from the box to describe the photographs (photo A: a man in retro clothes; photo B: a model on a catwalk).</span></div>
+  <div class="wordbox">
+    <span class="wb-label">Word box</span>
+    <div class="chips"><span>collar</span><span>fashion parade</span><span>jeans</span><span>leather jacket</span><span>make-up</span><span>sleeveless top</span><span>sunglasses</span><span>T-shirt</span></div>
+  </div>
+  <div class="model">
+    <h5>Possible answers</h5>
+    <p><b>Photograph A:</b> jeans, leather jacket, T-shirt</p>
+    <p><b>Photograph B:</b> collar, fashion parade, make-up, sleeveless top</p>
+  </div>
+  <div class="controls">
+    <button class="btn-model" onclick="toggleModel(this)">Show possible answers</button>
+  </div>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">2</span><span class="ex-title">Complete the sentences with your own ideas.</span></div>
+  <p class="note">1 The kind of retro fashions I like best are … because … &nbsp;&nbsp; 2 When I look at some of the contemporary fashions I think …</p>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">3</span><span class="ex-title">Choose the correct option to complete the sentences.</span></div>
+  <ol class="qlist">
+    <li>I think some contemporary fashions have <select data-type="select" data-answer="become"><option value=""></option><option>become</option><option>turned</option><option>gone</option><option>developed</option></select> too extreme.</li>
+    <li>That jacket <select data-type="select" data-answer="looks"><option value=""></option><option>suits</option><option>looks</option><option>goes</option><option>fits</option></select> really good on you.</li>
+    <li>My friend is <select data-type="select" data-answer="considering"><option value=""></option><option>considering</option><option>wondering</option><option>thinking</option><option>questioning</option></select> growing a beard.</li>
+    <li>A lot of people grew their hair <select data-type="select" data-answer="long"><option value=""></option><option>big</option><option>long</option><option>large</option><option>wide</option></select> in the 1970s.</li>
+    <li>One of the things I <select data-type="select" data-answer="have"><option value=""></option><option>get</option><option>have</option><option>enjoy</option><option>make</option></select> fun doing is looking at old photos.</li>
+    <li>My parents have some photos of <select data-type="select" data-answer="themselves"><option value=""></option><option>theirs</option><option>they</option><option>their</option><option>themselves</option></select> taken in the 1980s – they look so young!</li>
+  </ol>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">4</span><span class="ex-title">For each question, choose the correct answer.</span></div>
+  <div class="passage">
+    <h4>The styles that keep coming back</h4>
+    <p>Have you ever bought something you thought was the latest fashion, only to have a parent or grandparent say ‘Oh, I had one of those when I was your age’?</p>
+    <p>The (1) <select data-type="select" data-answer="reason"><option value=""></option><option>reason</option><option>cause</option><option>explanation</option><option>excuse</option></select> this happens is that fashion trends are endlessly recycled. Styles that were popular in the 80s, 70s, 60s and 50s and even (2) <select data-type="select" data-answer="earlier"><option value=""></option><option>longer</option><option>older</option><option>later</option><option>earlier</option></select> than this, continue to inspire today’s designers. Even people involved in producing top fashion labels (3) <select data-type="select" data-answer="look"><option value=""></option><option>see</option><option>watch</option><option>look</option><option>consider</option></select> back to the clothes of the past. They often find their best ideas in things (4) <select data-type="select" data-answer="worn"><option value=""></option><option>dressed</option><option>carried</option><option>used</option><option>worn</option></select> by the young people from previous generations, and reproduce these rather than creating something completely new. This means that if a style looked good and was popular before, there is every (5) <select data-type="select" data-answer="chance"><option value=""></option><option>opportunity</option><option>risk</option><option>chance</option><option>option</option></select> that it will be again.</p>
+    <p>So take a look at photos of your parents or grandparents when they were your age. They might (6) <select data-type="select" data-answer="give"><option value=""></option><option>provide</option><option>give</option><option>get</option><option>present</option></select> you some ideas for your own wardrobe!</p>
+  </div>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">5</span><span class="ex-title">Find words in the article in Exercise 4 to match definitions 1–4.</span></div>
+  <ol class="qlist">
+    <li>continually, something that keeps happening all the time
+      <div class="q-ans"><input type="text" data-type="text" data-answer="endlessly"></div></li>
+    <li>give someone else good ideas
+      <div class="q-ans"><input type="text" data-type="text" data-answer="inspire"></div></li>
+    <li>make something again
+      <div class="q-ans"><input type="text" data-type="text" data-answer="reproduce"></div></li>
+    <li>all the clothes you like to wear
+      <div class="q-ans"><input type="text" data-type="text" data-answer="wardrobe"></div></li>
+  </ol>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<!-- ================= VOCABULARY 1 ================= -->
+<div class="skill" id="voc1">
+  <h3>Vocabulary</h3>
+  <p class="sub">linkers of addition and contrast &middot; Coursebook page 43</p>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">1</span><span class="ex-title">Choose the correct alternatives to complete the sentences.</span></div>
+  <ol class="qlist">
+    <li><select data-type="select" data-answer="Although"><option value=""></option><option>Although</option><option>However</option></select> I am not interested in history, I like watching historical films.</li>
+    <li>I love going to museums <select data-type="select" data-answer="as well as"><option value=""></option><option>as well as</option><option>too</option></select> art galleries.</li>
+    <li>I’d love to go to Egypt <select data-type="select" data-answer="although"><option value=""></option><option>although</option><option>in spite of</option></select> it’s very hot in the summer.</li>
+    <li>I learn about history from books and <select data-type="select" data-answer="also"><option value=""></option><option>also</option><option>too</option></select> from the internet.</li>
+    <li>I haven’t read a history book in years <select data-type="select" data-answer="in spite of"><option value=""></option><option>although</option><option>in spite of</option></select> the fact that I studied it at school.</li>
+    <li><select data-type="select" data-answer="Despite"><option value=""></option><option>Despite</option><option>Though</option></select> the rain, we still went to the museum.</li>
+    <li>My brother hates visiting museums. He came with us <select data-type="select" data-answer="though"><option value=""></option><option>despite</option><option>though</option></select>.</li>
+    <li>We visited a number of historical sites and quite a few museums <select data-type="select" data-answer="too"><option value=""></option><option>as well as</option><option>too</option></select>.</li>
+  </ol>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">2</span><span class="ex-title">Complete the sentences with linkers from Exercise 1.</span></div>
+  <ol class="qlist">
+    <li>I love visiting old buildings <input type="text" class="wide" data-type="text" data-answer="in spite of|despite"> the fact that some of them are not very well kept.</li>
+    <li>My best friend enjoys visiting old places <input type="text" class="wide" data-type="text" data-answer="as well as"> going on beach holidays.</li>
+    <li><input type="text" class="wide" data-type="text" data-answer="despite|in spite of"> the high cost, we decided to buy tickets to the exhibition.</li>
+    <li>I don’t like spending time on the internet <input type="text" class="wide" data-type="text" data-answer="although|though"> I can find lots of information there.</li>
+    <li>I really enjoy reading history books. <input type="text" class="wide" data-type="text" data-answer="however">, my friend doesn’t.</li>
+    <li>I’m not really interested in watching historical films <input type="text" class="wide" data-type="text" data-answer="though"> – they seem so unreal.</li>
+    <li>He loves watching historical films. He <input type="text" class="wide" data-type="text" data-answer="also"> enjoys visiting museums and historical sites.</li>
+  </ol>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<!-- ================= VOCABULARY 2 ================= -->
+<div class="skill" id="voc2">
+  <h3>Vocabulary</h3>
+  <p class="sub">town and city &middot; Coursebook page 44</p>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">1</span><span class="ex-title">Write the word for each definition. (These are the crossword answers.)</span></div>
+  <ol class="qlist">
+    <li>typical weather conditions in an area
+      <div class="q-ans"><input type="text" data-type="text" data-answer="climate"></div></li>
+    <li>in a place near where you live
+      <div class="q-ans"><input type="text" data-type="text" data-answer="local"></div></li>
+    <li>when something gets bigger or develops
+      <div class="q-ans"><input type="text" data-type="text" data-answer="growth"></div></li>
+    <li>adjective from ‘friend’
+      <div class="q-ans"><input type="text" data-type="text" data-answer="friendly"></div></li>
+    <li>services that are available in a place
+      <div class="q-ans"><input type="text" data-type="text" data-answer="facilities"></div></li>
+    <li>a person who lives in a house very near you
+      <div class="q-ans"><input type="text" data-type="text" data-answer="neighbour|neighbor"></div></li>
+    <li>films, concerts, etc. that people like to watch
+      <div class="q-ans"><input type="text" data-type="text" data-answer="entertainment"></div></li>
+    <li>full of activity
+      <div class="q-ans"><input type="text" data-type="text" data-answer="lively"></div></li>
+  </ol>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">2</span><span class="ex-title">Complete the text with the words in the box.</span></div>
+  <div class="wordbox">
+    <span class="wb-label">Word box</span>
+    <div class="chips"><span>facilities</span><span>fresh</span><span>friendly</span><span>growth</span><span>lively</span><span>local</span><span>mild</span><span>playgrounds</span><span>spaces</span><span>transport</span></div>
+  </div>
+  <div class="passage">
+    <p><b>Santa Cruz de Tenerife</b>, where I live, has been described as one of the world’s most liveable cities in a recent article. The journalist commented on the (1) <select data-type="select" data-answer="mild"><option value=""></option><option>facilities</option><option>fresh</option><option>friendly</option><option>growth</option><option>lively</option><option>local</option><option>mild</option><option>playgrounds</option><option>spaces</option><option>transport</option></select> climate, excellent public (2) <select data-type="select" data-answer="transport"><option value=""></option><option>facilities</option><option>fresh</option><option>friendly</option><option>growth</option><option>lively</option><option>local</option><option>mild</option><option>playgrounds</option><option>spaces</option><option>transport</option></select> for getting around the city and the wide range of entertainment (3) <select data-type="select" data-answer="facilities"><option value=""></option><option>facilities</option><option>fresh</option><option>friendly</option><option>growth</option><option>lively</option><option>local</option><option>mild</option><option>playgrounds</option><option>spaces</option><option>transport</option></select>. There’s a concert hall, a theatre, several museums and an art gallery.</p>
+    <p>If you prefer to spend your time out in the (4) <select data-type="select" data-answer="fresh"><option value=""></option><option>facilities</option><option>fresh</option><option>friendly</option><option>growth</option><option>lively</option><option>local</option><option>mild</option><option>playgrounds</option><option>spaces</option><option>transport</option></select> air, there are plenty of open (5) <select data-type="select" data-answer="spaces"><option value=""></option><option>facilities</option><option>fresh</option><option>friendly</option><option>growth</option><option>lively</option><option>local</option><option>mild</option><option>playgrounds</option><option>spaces</option><option>transport</option></select> and parks, even in the centre of the city. Some of the parks have (6) <select data-type="select" data-answer="playgrounds"><option value=""></option><option>facilities</option><option>fresh</option><option>friendly</option><option>growth</option><option>lively</option><option>local</option><option>mild</option><option>playgrounds</option><option>spaces</option><option>transport</option></select> for young children.</p>
+    <p>Though there has been quite rapid population (7) <select data-type="select" data-answer="growth"><option value=""></option><option>facilities</option><option>fresh</option><option>friendly</option><option>growth</option><option>lively</option><option>local</option><option>mild</option><option>playgrounds</option><option>spaces</option><option>transport</option></select> over the last few years, you can still find (8) <select data-type="select" data-answer="friendly"><option value=""></option><option>facilities</option><option>fresh</option><option>friendly</option><option>growth</option><option>lively</option><option>local</option><option>mild</option><option>playgrounds</option><option>spaces</option><option>transport</option></select> neighbours and a sense of community. My own neighbourhood is very (9) <select data-type="select" data-answer="lively"><option value=""></option><option>facilities</option><option>fresh</option><option>friendly</option><option>growth</option><option>lively</option><option>local</option><option>mild</option><option>playgrounds</option><option>spaces</option><option>transport</option></select> – there’s always something going on – and the (10) <select data-type="select" data-answer="local"><option value=""></option><option>facilities</option><option>fresh</option><option>friendly</option><option>growth</option><option>lively</option><option>local</option><option>mild</option><option>playgrounds</option><option>spaces</option><option>transport</option></select> shops are great too.</p>
+  </div>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">3</span><span class="ex-title">Complete the sentences with <em>fresh</em>, <em>work</em> or <em>public</em>.</span></div>
+  <ol class="qlist">
+    <li>One of the nice things about living in the country is all the <select data-type="select" data-answer="fresh"><option value=""></option><option>fresh</option><option>work</option><option>public</option></select> fruit you can buy there.</li>
+    <li>It’s a really good idea for young people to get some kind of <select data-type="select" data-answer="work"><option value=""></option><option>fresh</option><option>work</option><option>public</option></select> experience before they leave school.</li>
+    <li>It’s always better to use <select data-type="select" data-answer="public"><option value=""></option><option>fresh</option><option>work</option><option>public</option></select> transport than to drive your own car in a city.</li>
+    <li>Monday is a <select data-type="select" data-answer="public"><option value=""></option><option>fresh</option><option>work</option><option>public</option></select> holiday so none of the shops will be open.</li>
+    <li>I try to <select data-type="select" data-answer="work"><option value=""></option><option>fresh</option><option>work</option><option>public</option></select> out whenever I can, just to keep fit, but it’s not always easy to find the time.</li>
+    <li>I’m moving abroad next month – I need a <select data-type="select" data-answer="fresh"><option value=""></option><option>fresh</option><option>work</option><option>public</option></select> start.</li>
+  </ol>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<!-- ================= GRAMMAR 2 ================= -->
+<div class="skill" id="gram2">
+  <h3>Grammar</h3>
+  <p class="sub">past simple and present perfect &middot; Coursebook page 45</p>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">1</span><span class="ex-title">Complete the sentences with <em>for</em> or <em>since</em>.</span></div>
+  <ol class="qlist tight">
+    <li>I’ve known my closest friend <select data-type="select" data-answer="for"><option value=""></option><option>for</option><option>since</option></select> about ten years.</li>
+    <li>I’ve been a student here <select data-type="select" data-answer="for"><option value=""></option><option>for</option><option>since</option></select> three weeks.</li>
+    <li>I’ve had my mobile phone <select data-type="select" data-answer="since"><option value=""></option><option>for</option><option>since</option></select> February.</li>
+    <li>My friend has had the same hairstyle <select data-type="select" data-answer="since"><option value=""></option><option>for</option><option>since</option></select> he was 14.</li>
+    <li>I’ve liked my favourite singer <select data-type="select" data-answer="for"><option value=""></option><option>for</option><option>since</option></select> a really long time.</li>
+    <li>We’ve lived in our house <select data-type="select" data-answer="since"><option value=""></option><option>for</option><option>since</option></select> 2002.</li>
+  </ol>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">2</span><span class="ex-title">Make questions with <em>How long …?</em> to which the sentences in Exercise 1 are the answers. Then answer the questions about yourself.</span></div>
+  <div class="model">
+    <h5>Answers</h5>
+    <p>1 How long have you known your closest friend?</p>
+    <p>2 How long have you been a student here?</p>
+    <p>3 How long have you had your mobile phone?</p>
+    <p>4 How long has your friend had the same hairstyle?</p>
+    <p>5 How long have you liked your favourite singer?</p>
+    <p>6 How long have you lived in your house?</p>
+  </div>
+  <div class="controls">
+    <button class="btn-model" onclick="toggleModel(this)">Show answers</button>
+  </div>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">3</span><span class="ex-title">Complete the sentences with the past simple or present perfect form of the verbs in brackets.</span></div>
+  <ul class="lettered">
+    <li><span class="cl">A</span>It’s great but I’m thinking about getting a different one that <input type="text" data-type="text" data-answer="came out"> (come out) last month.</li>
+    <li><span class="cl">B</span>I <input type="text" class="wide" data-type="text" data-answer="haven't made|have not made"> (not make) many new friends yet.</li>
+    <li><span class="cl">C</span>He thinks it’s time for a change though so he <input type="text" class="wide" data-type="text" data-answer="has decided|'s decided"> (decide) to let it grow. Finally!</li>
+    <li><span class="cl">D</span>A couple of months ago I <input type="text" data-type="text" data-answer="saw"> (see) her play in London.</li>
+    <li><span class="cl">E</span>My parents <input type="text" data-type="text" data-answer="bought"> (buy) it after we <input type="text" data-type="text" data-answer="moved"> (move) here from Buenos Aires.</li>
+    <li><span class="cl">F</span>We <input type="text" class="wide" data-type="text" data-answer="have done|'ve done"> (do) so many different things together.</li>
+  </ul>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">4</span><span class="ex-title">Match the sentences in Exercise 1 to the sentences in Exercise 3.</span></div>
+  <ol class="qlist tight">
+    <li>I’ve known my closest friend for about ten years.
+      <div class="q-ans"><select data-type="select" data-answer="F"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></div></li>
+    <li>I’ve been a student here for three weeks.
+      <div class="q-ans"><select data-type="select" data-answer="B"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></div></li>
+    <li>I’ve had my mobile phone since February.
+      <div class="q-ans"><select data-type="select" data-answer="A"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></div></li>
+    <li>My friend has had the same hairstyle since he was 14.
+      <div class="q-ans"><select data-type="select" data-answer="C"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></div></li>
+    <li>I’ve liked my favourite singer for a really long time.
+      <div class="q-ans"><select data-type="select" data-answer="D"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></div></li>
+    <li>We’ve lived in our house since 2002.
+      <div class="q-ans"><select data-type="select" data-answer="E"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></div></li>
+  </ol>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<!-- ================= WRITING ================= -->
+<div class="skill" id="wri">
+  <h3>Writing</h3>
+  <p class="sub">Article (Part 2) &middot; Coursebook page 46</p>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">1</span><span class="ex-title">Look at the exam task below and decide if these sentences are true or false.</span></div>
+  <div class="card-note">
+    <p>You see this notice on an English-language website.</p>
+    <p style="text-align:center;color:var(--red-dark);font-weight:700;margin:12px 0 4px">Articles wanted!<br>Something I would never throw away!</p>
+    <p style="text-align:center;margin:0">What is your most treasured possession? Why is it important to you? Why don’t you want to throw it away?<br>Write an article answering these questions and we will put it on our website.</p>
+    <p style="margin-bottom:0">Write your <b>article</b> in about <b>100 words</b>.</p>
+  </div>
+  <p><em>You have to …</em></p>
+  <ol class="qlist">
+    <li>identify your most treasured possession.
+      <div class="opts" data-type="radio" data-answer="true">
+        <label class="opt"><input type="radio" name="u4w1a" value="true">True</label>
+        <label class="opt"><input type="radio" name="u4w1a" value="false">False</label>
+      </div></li>
+    <li>explain why it is so important to you.
+      <div class="opts" data-type="radio" data-answer="true">
+        <label class="opt"><input type="radio" name="u4w1b" value="true">True</label>
+        <label class="opt"><input type="radio" name="u4w1b" value="false">False</label>
+      </div></li>
+    <li>describe how much it cost.
+      <div class="opts" data-type="radio" data-answer="false">
+        <label class="opt"><input type="radio" name="u4w1c" value="true">True</label>
+        <label class="opt"><input type="radio" name="u4w1c" value="false">False</label>
+      </div></li>
+    <li>explain why you don’t want to throw it away.
+      <div class="opts" data-type="radio" data-answer="true">
+        <label class="opt"><input type="radio" name="u4w1d" value="true">True</label>
+        <label class="opt"><input type="radio" name="u4w1d" value="false">False</label>
+      </div></li>
+  </ol>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">2</span><span class="ex-title">Below are some ideas students had for their articles. Read the sentences in Exercise 3. Which two ideas are <em>not</em> mentioned? Tick two.</span></div>
+  <div class="tips" data-type="checkbox" data-answer="photograph,valuable">
+    <label><input type="checkbox" value="gift">a gift from someone they love</label>
+    <label><input type="checkbox" value="instrument">a musical instrument</label>
+    <label><input type="checkbox" value="photograph">a photograph</label>
+    <label><input type="checkbox" value="dropped">something another person had dropped</label>
+    <label><input type="checkbox" value="sports">something that was used by a famous sportsperson</label>
+    <label><input type="checkbox" value="read">something they read</label>
+    <label><input type="checkbox" value="wear">something they wear</label>
+    <label><input type="checkbox" value="valuable">something very valuable</label>
+  </div>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">3</span><span class="ex-title">Match the first sentences (1–6) with the reasons (A–F) that students have given to make introductions to the article.</span></div>
+  <ol class="qlist">
+    <li>I know it sounds strange but one object I would never throw away is something I actually found in the street. It’s a really old dirty coin.
+      <div class="q-ans"><select data-type="select" data-answer="F"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></div></li>
+    <li>I would never throw away the soft teddy bear my grandmother gave me when I was born.
+      <div class="q-ans"><select data-type="select" data-answer="E"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></div></li>
+    <li>I’ve always enjoyed exciting fantasy stories, and there’s one in particular that I love.
+      <div class="q-ans"><select data-type="select" data-answer="A"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></div></li>
+    <li>I will never throw away the used tennis ball I caught at an international tennis match.
+      <div class="q-ans"><select data-type="select" data-answer="D"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></div></li>
+    <li>No matter how old I get I will never throw away a fantastic T-shirt I was given for my fourteenth birthday.
+      <div class="q-ans"><select data-type="select" data-answer="B"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></div></li>
+    <li>I just couldn’t live without playing the guitar, though mine is quite old.
+      <div class="q-ans"><select data-type="select" data-answer="C"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></div></li>
+  </ol>
+  <ul class="lettered">
+    <li><span class="cl">A</span>It’s called ‘Harry Potter and the Philosopher’s Stone’. I would never throw away my copy.</li>
+    <li><span class="cl">B</span>It’s already looking a bit worn out but I still love wearing it.</li>
+    <li><span class="cl">C</span>I’m saving up for a better one now I can play more music, but that first one will always be my favourite.</li>
+    <li><span class="cl">D</span>Novak Djokovic hit the ball into the crowd at the end of the match. Just having that ball inspires me to keep training.</li>
+    <li><span class="cl">E</span>He is still sitting on my bed today and I hardly ever go away without taking him with me.</li>
+    <li><span class="cl">F</span>The date is 1947 and that’s the year when my grandfather was born.</li>
+  </ul>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">4</span><span class="ex-title">Which interesting adjective did each student use in first sentences 1–6 in Exercise 3?</span></div>
+  <ol class="qlist tight">
+    <li>the old <b>?</b> coin
+      <div class="q-ans"><input type="text" data-type="text" data-answer="dirty"></div></li>
+    <li>the <b>?</b> teddy bear
+      <div class="q-ans"><input type="text" data-type="text" data-answer="soft"></div></li>
+    <li><b>?</b> fantasy stories
+      <div class="q-ans"><input type="text" data-type="text" data-answer="exciting"></div></li>
+    <li>the <b>?</b> tennis ball
+      <div class="q-ans"><input type="text" data-type="text" data-answer="used"></div></li>
+    <li>a <b>?</b> T-shirt
+      <div class="q-ans"><input type="text" data-type="text" data-answer="fantastic"></div></li>
+    <li>my guitar is quite <b>?</b>
+      <div class="q-ans"><input type="text" data-type="text" data-answer="old"></div></li>
+  </ol>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">5</span><span class="ex-title">Write an introduction for each of the two ideas in Exercise 2 that were not mentioned.</span></div>
+  <div class="model">
+    <h5>Possible answers</h5>
+    <p><b>A photograph.</b> I don’t normally keep photographs in frames – I prefer to have them on my computer – but I like to look at this one every day because of the people in it. It’s a photo of my class from my last year at school.</p>
+    <p><b>Something very valuable.</b> I haven’t got much jewellery of my own, and most of what I do have is inexpensive. However, I have a diamond ring that has been in my family for many years that my mother gave me when I was eighteen.</p>
+  </div>
+  <div class="controls">
+    <button class="btn-model" onclick="toggleModel(this)">Show possible answers</button>
+  </div>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">6</span><span class="ex-title">Look at two conclusions to the article. Which one is more interesting?</span></div>
+  <div class="mc" data-type="radio" data-answer="B">
+    <label class="opt"><input type="radio" name="u4w6" value="A"><span><span class="lbl">A</span> That is why I would never throw away something like this. You should get one too. They’re really wonderful.</span></label>
+    <label class="opt"><input type="radio" name="u4w6" value="B"><span><span class="lbl">B</span> So, whatever happens, I don’t think I could ever throw away something that has meant so much to me throughout my life. I look at it every day and I will treasure it forever.</span></label>
+  </div>
+  <div class="model">
+    <h5>Why</h5>
+    <p>B, because it has interesting details and adjectives.</p>
+  </div>
+  <div class="controls">
+    <button class="btn-check" onclick="checkEx(this)">Check answers</button>
+    <button class="btn-reset" onclick="resetEx(this)">Reset</button>
+    <button class="btn-model" onclick="toggleModel(this)">Show explanation</button>
+    <span class="result"></span>
+  </div>
+</div>
+
+<div class="exercise">
+  <div class="ex-head"><span class="exnum">7</span><span class="ex-title">Plan and write your own answer to the exam task in Exercise 1. Use interesting adjectives and give interesting details.</span></div>
+  <div class="model">
+    <h5>Sample answer</h5>
+    <p>I don’t usually keep things, and in fact I often recycle objects, but there is one thing that I love and will never throw away. It’s an old necklace.</p>
+    <p>It isn’t very beautiful and it certainly isn’t valuable, but it belonged to my grandmother. She wore it all the time, and she gave it to me on my fifteenth birthday. It is important to me because it was important to her, and whenever I look at it I think of her.</p>
+    <p>I could never throw it away, because it is an important part of my family’s history.</p>
+  </div>
+  <div class="controls">
+    <button class="btn-model" onclick="toggleModel(this)">Show sample answer</button>
+  </div>
+</div>
+<hr class="soft">
+<footer>Gold B1 Preliminary: Exam Maximiser — Unit 4. Interactive practice.<br>Audio &copy; Pearson. For classroom use.</footer>
+</div>
+<button id="toTop" type="button" aria-label="Back to top and contents"><span class="arrow" aria-hidden="true">&#8593;</span> Top</button>
+
+<script>
+(function(){
+  var btn=document.getElementById('toTop');
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ticking=false;
+  function update(){
+    if(window.pageYOffset>420) btn.classList.add('show');
+    else btn.classList.remove('show');
+    ticking=false;
+  }
+  window.addEventListener('scroll',function(){
+    if(!ticking){ ticking=true; window.requestAnimationFrame(update); }
+  },{passive:true});
+  btn.addEventListener('click',function(){
+    window.scrollTo({top:0, behavior: reduce?'auto':'smooth'});
+    var first=document.querySelector('.toc a');
+    if(first) setTimeout(function(){ first.focus({preventScroll:true}); }, reduce?0:420);
+  });
+  update();
+})();
+
+function norm(s){
+  return (s||'').toString().trim().toLowerCase()
+    .replace(/[\u2019\u2018]/g,"'").replace(/[\u201C\u201D]/g,'"')
+    .replace(/[\u2013\u2014]/g,'-')
+    .replace(/\s+/g,' ').replace(/[.!?]+$/,'');
+}
+function setState(el,ok){ el.classList.remove('correct','incorrect'); el.classList.add(ok?'correct':'incorrect'); }
+function showHint(field, ok, answerStr){
+  var n=field.nextElementSibling;
+  if(n && n.classList && n.classList.contains('ans-hint')) n.parentNode.removeChild(n);
+  if(!ok){
+    var first=(answerStr||'').split('|')[0];
+    var h=document.createElement('span');
+    h.className='ans-hint'; h.textContent='\u2713 '+first;
+    field.insertAdjacentElement('afterend', h);
+  }
+}
+function checkEx(btn){
+  var ex=btn.closest('.exercise');
+  var total=0, got=0;
+  ex.querySelectorAll('[data-type]').forEach(function(q){
+    var type=q.dataset.type||'text';
+    var ok=false;
+
+    if(type==='text'){
+      var el=q.tagName==='INPUT'?q:q.querySelector('input');
+      var acc=(q.dataset.answer||'').split('|').map(norm);
+      ok=acc.indexOf(norm(el.value))>-1; setState(el,ok);
+      showHint(el, ok, q.dataset.answer); total++;
+
+    }else if(type==='select'){
+      var s=q.tagName==='SELECT'?q:q.querySelector('select');
+      var accs=(q.dataset.answer||'').split('|').map(norm);
+      ok=accs.indexOf(norm(s.value))>-1; setState(s,ok);
+      showHint(s, ok, q.dataset.answer); total++;
+
+    }else if(type==='radio'){
+      var accr=(q.dataset.answer||'').split('|').map(norm);
+      var chk=q.querySelector('input[type=radio]:checked');
+      ok= !!chk && accr.indexOf(norm(chk.value))>-1;
+      q.querySelectorAll('.opt').forEach(function(opt){
+        opt.classList.remove('opt-correct','opt-wrong');
+        var inp=opt.querySelector('input');
+        if(accr.indexOf(norm(inp.value))>-1) opt.classList.add('opt-correct');
+        else if(inp.checked) opt.classList.add('opt-wrong');
+      });
+      total++;
+
+    }else if(type==='checkbox'){
+      var wantArr=(q.dataset.answer||'').split(',').map(function(x){return x.trim();});
+      var haveArr=[].slice.call(q.querySelectorAll('input:checked')).map(function(i){return i.value;});
+      ok=(wantArr.slice().sort().join(',')===haveArr.slice().sort().join(','));
+      q.querySelectorAll('label').forEach(function(lab){
+        lab.classList.remove('opt-correct','opt-wrong');
+        var inp=lab.querySelector('input');
+        if(wantArr.indexOf(inp.value)>-1) lab.classList.add('opt-correct');
+        else if(inp.checked) lab.classList.add('opt-wrong');
+      });
+      total++;
+    }
+    if(ok)got++;
+  });
+
+  var res=ex.querySelector('.result');
+  if(res){
+    res.textContent='You got '+got+' out of '+total+' correct.';
+    res.classList.remove('pass','part');
+    res.classList.add(got===total?'pass':'part');
+  }
+}
+
+function resetEx(btn){
+  var ex=btn.closest('.exercise');
+  ex.querySelectorAll('input[type=text]').forEach(function(i){i.value='';i.classList.remove('correct','incorrect');});
+  ex.querySelectorAll('select').forEach(function(s){s.value='';s.classList.remove('correct','incorrect');});
+  ex.querySelectorAll('input[type=radio],input[type=checkbox]').forEach(function(i){i.checked=false;});
+  ex.querySelectorAll('label').forEach(function(l){l.classList.remove('opt-correct','opt-wrong');});
+  ex.querySelectorAll('.ans-hint').forEach(function(x){x.parentNode.removeChild(x);});
+  var res=ex.querySelector('.result'); if(res){res.textContent='';res.classList.remove('pass','part');}
+}
+
+function toggleModel(btn){
+  var m=btn.closest('.exercise').querySelector('.model');
+  var shown=m.classList.toggle('show');
+  btn.textContent=shown?'Hide answers':(btn.dataset.label||'Show answers');
+}
+document.querySelectorAll('.btn-model').forEach(function(b){b.dataset.label=b.textContent;});
+</script>
+</body>
+</html>
